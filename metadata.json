@@ -1,0 +1,6 @@
+{
+  "name": "VANGUARDBOOKSEARCH - Book Discoverability & Positioning Architecture",
+  "description": "Professional book discoverability and positioning architecture for authors. Search relevance, metadata optimization, category alignment, and strategic reader access.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%" fill="none">
+  <defs>
+    <!-- Gold Metallic Gradients -->
+    <linearGradient id="goldLight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBF0B9" />
+      <stop offset="35%" stop-color="#E5BE6E" />
+      <stop offset="70%" stop-color="#C29641" />
+      <stop offset="100%" stop-color="#8E651D" />
+    </linearGradient>
+    <linearGradient id="goldDark" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#DFC078" />
+      <stop offset="50%" stop-color="#B2842E" />
+      <stop offset="100%" stop-color="#694C12" />
+    </linearGradient>
+    <linearGradient id="goldShine" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#C29641" />
+      <stop offset="45%" stop-color="#FDF4C9" />
+      <stop offset="55%" stop-color="#F7DE9B" />
+      <stop offset="100%" stop-color="#9C7328" />
+    </linearGradient>
+
+    <!-- Obsidian Navy Gradients -->
+    <linearGradient id="obsidianMain" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0E1D2D" />
+      <stop offset="50%" stop-color="#091420" />
+      <stop offset="100%" stop-color="#04090F" />
+    </linearGradient>
+    <linearGradient id="obsidianHighlight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A2F45" />
+      <stop offset="50%" stop-color="#0E1C2B" />
+      <stop offset="100%" stop-color="#060C14" />
+    </linearGradient>
+
+    <!-- Subtle Drop Shadow -->
+    <filter id="emblemShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#04090F" flood-opacity="0.25" />
+    </filter>
+  </defs>
+
+  <g filter="url(#emblemShadow)">
+    <!-- 1. Gold Halo Ring Behind Top Star -->
+    <circle cx="200" cy="130" r="76" stroke="url(#goldLight)" stroke-width="4.5" fill="none" opacity="0.9" />
+    <circle cx="200" cy="130" r="73" stroke="url(#goldDark)" stroke-width="1.5" fill="none" opacity="0.6" />
+    <!-- Horizontal Crosshair Ray Behind Star -->
+    <path d="M102 130 L145 130 M255 130 L298 130" stroke="url(#goldLight)" stroke-width="3.5" stroke-linecap="round" />
+
+    <!-- 2. The Architectural V Chevron (Lower Base) -->
+    <!-- Outer Gold Bevel -->
+    <path d="M200 380 L88 234 C120 236 155 264 200 318 C245 264 280 236 312 234 Z" fill="url(#goldLight)" />
+    <!-- Inner Obsidian V Core -->
+    <path d="M200 370 L98 238 C128 244 160 274 200 326 C240 274 272 244 302 238 Z" fill="url(#obsidianMain)" />
+    <!-- Center Inverted V Hollow Notch with Gold Trim -->
+    <path d="M200 316 L145 238 C168 242 186 248 200 258 C214 248 232 242 255 238 Z" fill="url(#goldDark)" />
+    <path d="M200 306 L152 240 C172 245 188 250 200 260 C212 250 228 245 248 240 Z" fill="#FFFFFF" fill-opacity="0.95" />
+
+    <!-- 3. The Open Book Wings (Middle Section) -->
+    <!-- Lower Wing Layer Left -->
+    <path d="M200 238 C158 226 95 210 50 196 C85 220 135 244 195 248 Z" fill="url(#goldLight)" />
+    <path d="M198 236 C158 224 98 210 56 198 C88 218 135 240 194 245 Z" fill="url(#obsidianHighlight)" />
+
+    <!-- Lower Wing Layer Right -->
+    <path d="M200 238 C242 226 305 210 350 196 C315 220 265 244 205 248 Z" fill="url(#goldDark)" />
+    <path d="M202 236 C242 224 302 210 344 198 C312 218 265 240 206 245 Z" fill="url(#obsidianMain)" />
+
+    <!-- Middle Page Layer Left -->
+    <path d="M200 232 C155 208 92 184 56 168 C92 192 145 216 196 230 Z" fill="url(#goldLight)" />
+    <path d="M198 230 C155 206 96 184 62 170 C95 190 144 213 194 227 Z" fill="url(#obsidianHighlight)" />
+
+    <!-- Middle Page Layer Right -->
+    <path d="M200 232 C245 208 308 184 344 168 C308 192 255 216 204 230 Z" fill="url(#goldDark)" />
+    <path d="M202 230 C245 206 304 184 338 170 C305 190 256 213 206 227 Z" fill="url(#obsidianMain)" />
+
+    <!-- Upper Page Layer Left -->
+    <path d="M200 226 C155 190 100 162 70 146 C105 168 152 195 196 220 Z" fill="url(#goldLight)" />
+    <path d="M198 224 C156 190 106 164 78 149 C108 168 152 193 195 217 Z" fill="url(#obsidianHighlight)" />
+
+    <!-- Upper Page Layer Right -->
+    <path d="M200 226 C245 190 300 162 330 146 C295 168 248 195 204 220 Z" fill="url(#goldDark)" />
+    <path d="M202 224 C244 190 294 164 322 149 C292 168 248 193 205 217 Z" fill="url(#obsidianMain)" />
+
+    <!-- Top Page Layer Flaps -->
+    <path d="M200 220 C160 178 115 152 82 140 C118 155 160 182 196 214 Z" fill="url(#goldShine)" />
+    <path d="M200 220 C240 178 285 152 318 140 C282 155 240 182 204 214 Z" fill="url(#goldLight)" />
+
+    <!-- 4. The 4-Pointed Faceted Compass / North Star -->
+    <!-- Top Vertical Spike (Left Obsidian Facet, Right Gold Facet) -->
+    <path d="M200 32 L186 130 L200 144 Z" fill="url(#obsidianHighlight)" />
+    <path d="M200 32 L200 144 L214 130 Z" fill="url(#goldShine)" />
+
+    <!-- Bottom Vertical Spike -->
+    <path d="M200 224 L186 144 L200 130 Z" fill="url(#obsidianMain)" />
+    <path d="M200 224 L200 130 L214 144 Z" fill="url(#goldLight)" />
+
+    <!-- Left Horizontal Spike -->
+    <path d="M140 138 L200 144 L186 130 Z" fill="url(#obsidianMain)" />
+    <path d="M140 138 L186 130 L200 116 Z" fill="url(#obsidianHighlight)" />
+
+    <!-- Right Horizontal Spike -->
+    <path d="M260 138 L200 116 L214 130 Z" fill="url(#goldShine)" />
+    <path d="M260 138 L214 130 L200 144 Z" fill="url(#goldDark)" />
+
+    <!-- Center Faceted Star Diamond -->
+    <polygon points="200,116 214,130 200,144 186,130" fill="url(#goldShine)" stroke="url(#goldLight)" stroke-width="1.5" />
+    <polygon points="200,122 208,130 200,138 192,130" fill="#FFFFFF" fill-opacity="0.8" />
+  </g>
+</svg>

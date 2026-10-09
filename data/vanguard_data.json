@@ -1,0 +1,81 @@
+{
+  "reviews": [
+    {
+      "id": "rev-sample-1",
+      "fullName": "Eleanor Vance",
+      "email": "eleanor.vance@example.com",
+      "authorWebsite": "https://eleanorvance.com",
+      "bookTitle": "The Architecture of Midnight",
+      "genre": "Literary Mystery",
+      "servicesUsed": [
+        "Amazon SEO and Keyword Optimization",
+        "Amazon Metadata Optimization",
+        "ARC Campaigns"
+      ],
+      "rating": 5,
+      "writtenFeedback": "The clarity brought to my book metadata and browse path positioning transformed how readers discover my titles. Instead of vague marketing advice, Vanguard provided a precise architectural review that connected directly with readers interested in atmospheric mystery.",
+      "displayName": "Eleanor Vance, Literary Novelist",
+      "consentToPublish": true,
+      "status": "approved",
+      "isPublished": true,
+      "isFeatured": true,
+      "createdAt": "2026-10-02T02:00:38.227Z",
+      "updatedAt": "2026-10-03T02:00:38.227Z",
+      "adminNotes": "Verified author submission. Publication consent confirmed."
+    },
+    {
+      "id": "rev-sample-2",
+      "fullName": "Dr. Marcus Holloway",
+      "email": "marcus.holloway@example.com",
+      "authorWebsite": "https://marcushollowaybooks.com",
+      "bookTitle": "Thresholds of Mind",
+      "genre": "Nonfiction / Cognitive Psychology",
+      "servicesUsed": [
+        "Amazon Category and Keyword Research",
+        "Amazon A+ Content Creation",
+        "Book Blogger and Influencer Outreach"
+      ],
+      "rating": 5,
+      "writtenFeedback": "Finding the right category alignment was the single most impactful adjustment we made. Vanguard understood the distinction between general self-help and rigorous cognitive science, placing the book in front of actual practitioners.",
+      "displayName": "Dr. M. Holloway, Author & Researcher",
+      "consentToPublish": true,
+      "status": "approved",
+      "isPublished": true,
+      "isFeatured": true,
+      "createdAt": "2026-10-06T02:00:38.227Z",
+      "updatedAt": "2026-10-07T02:00:38.227Z",
+      "adminNotes": "Verified author submission. Published."
+    },
+    {
+      "fullName": "Julian Thorne",
+      "email": "julian@example.com",
+      "bookTitle": "The Obsidian Quill",
+      "genre": "Fantasy",
+      "servicesUsed": [
+        "Amazon SEO and Keyword Optimization"
+      ],
+      "rating": 5,
+      "writtenFeedback": "The indexing optimization helped my historical fantasy title rank in relevant subcategories within weeks.",
+      "displayName": "J. Thorne",
+      "consentToPublish": true,
+      "id": "rev-1791511249267-7eeaa3",
+      "status": "approved",
+      "isPublished": true,
+      "isFeatured": false,
+      "createdAt": "2026-10-09T02:00:49.267Z",
+      "updatedAt": "2026-10-09T02:01:24.677Z"
+    }
+  ],
+  "contacts": [
+    {
+      "name": "Gwen Stacy",
+      "email": "gwen@example.com",
+      "subject": "Amazon Ads Management for Series Launch",
+      "message": "I have a 3-book YA sci-fi series and want to review advertising strategy and A+ content.",
+      "id": "con-1791511271832-294da1",
+      "createdAt": "2026-10-09T02:01:11.833Z",
+      "isRead": false
+    }
+  ],
+  "version": 1
+}

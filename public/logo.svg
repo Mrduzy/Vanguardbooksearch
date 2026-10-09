@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 88" width="540" height="88" fill="none">
+  <defs>
+    <!-- Gold Metallic Gradients -->
+    <linearGradient id="logoGoldLight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBF0B9" />
+      <stop offset="35%" stop-color="#E5BE6E" />
+      <stop offset="70%" stop-color="#C29641" />
+      <stop offset="100%" stop-color="#8E651D" />
+    </linearGradient>
+    <linearGradient id="logoGoldDark" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#DFC078" />
+      <stop offset="50%" stop-color="#B2842E" />
+      <stop offset="100%" stop-color="#694C12" />
+    </linearGradient>
+    <linearGradient id="logoGoldShine" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#C29641" />
+      <stop offset="45%" stop-color="#FDF4C9" />
+      <stop offset="55%" stop-color="#F7DE9B" />
+      <stop offset="100%" stop-color="#9C7328" />
+    </linearGradient>
+
+    <!-- Obsidian Navy Gradients -->
+    <linearGradient id="logoObsidianMain" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0E1D2D" />
+      <stop offset="50%" stop-color="#091420" />
+      <stop offset="100%" stop-color="#04090F" />
+    </linearGradient>
+    <linearGradient id="logoObsidianHighlight" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1A2F45" />
+      <stop offset="50%" stop-color="#0E1C2B" />
+      <stop offset="100%" stop-color="#060C14" />
+    </linearGradient>
+  </defs>
+
+  <!-- 1. Emblem on Left (Scaled and Centered) -->
+  <g transform="translate(4, 3) scale(0.205)">
+    <!-- Halo Ring -->
+    <circle cx="200" cy="130" r="76" stroke="url(#logoGoldLight)" stroke-width="4.5" fill="none" opacity="0.9" />
+    <path d="M102 130 L145 130 M255 130 L298 130" stroke="url(#logoGoldLight)" stroke-width="3.5" stroke-linecap="round" />
+
+    <!-- Architectural V Chevron -->
+    <path d="M200 380 L88 234 C120 236 155 264 200 318 C245 264 280 236 312 234 Z" fill="url(#logoGoldLight)" />
+    <path d="M200 370 L98 238 C128 244 160 274 200 326 C240 274 272 244 302 238 Z" fill="url(#logoObsidianMain)" />
+    <path d="M200 316 L145 238 C168 242 186 248 200 258 C214 248 232 242 255 238 Z" fill="url(#logoGoldDark)" />
+
+    <!-- Open Book Wings -->
+    <path d="M200 238 C158 226 95 210 50 196 C85 220 135 244 195 248 Z" fill="url(#logoGoldLight)" />
+    <path d="M198 236 C158 224 98 210 56 198 C88 218 135 240 194 245 Z" fill="url(#logoObsidianHighlight)" />
+    <path d="M200 238 C242 226 305 210 350 196 C315 220 265 244 205 248 Z" fill="url(#logoGoldDark)" />
+    <path d="M202 236 C242 224 302 210 344 198 C312 218 265 240 206 245 Z" fill="url(#logoObsidianMain)" />
+
+    <path d="M200 232 C155 208 92 184 56 168 C92 192 145 216 196 230 Z" fill="url(#logoGoldLight)" />
+    <path d="M198 230 C155 206 96 184 62 170 C95 190 144 213 194 227 Z" fill="url(#logoObsidianHighlight)" />
+    <path d="M200 232 C245 208 308 184 344 168 C308 192 255 216 204 230 Z" fill="url(#logoGoldDark)" />
+    <path d="M202 230 C245 206 304 184 338 170 C305 190 256 213 206 227 Z" fill="url(#logoObsidianMain)" />
+
+    <path d="M200 226 C155 190 100 162 70 146 C105 168 152 195 196 220 Z" fill="url(#logoGoldLight)" />
+    <path d="M198 224 C156 190 106 164 78 149 C108 168 152 193 195 217 Z" fill="url(#logoObsidianHighlight)" />
+    <path d="M200 226 C245 190 300 162 330 146 C295 168 248 195 204 220 Z" fill="url(#logoGoldDark)" />
+    <path d="M202 224 C244 190 294 164 322 149 C292 168 248 193 205 217 Z" fill="url(#logoObsidianMain)" />
+
+    <path d="M200 220 C160 178 115 152 82 140 C118 155 160 182 196 214 Z" fill="url(#logoGoldShine)" />
+    <path d="M200 220 C240 178 285 152 318 140 C282 155 240 182 204 214 Z" fill="url(#logoGoldLight)" />
+
+    <!-- 4-Pointed Star -->
+    <path d="M200 32 L186 130 L200 144 Z" fill="url(#logoObsidianHighlight)" />
+    <path d="M200 32 L200 144 L214 130 Z" fill="url(#logoGoldShine)" />
+    <path d="M200 224 L186 144 L200 130 Z" fill="url(#logoObsidianMain)" />
+    <path d="M200 224 L200 130 L214 144 Z" fill="url(#logoGoldLight)" />
+    <path d="M140 138 L200 144 L186 130 Z" fill="url(#logoObsidianMain)" />
+    <path d="M140 138 L186 130 L200 116 Z" fill="url(#logoObsidianHighlight)" />
+    <path d="M260 138 L200 116 L214 130 Z" fill="url(#logoGoldShine)" />
+    <path d="M260 138 L214 130 L200 144 Z" fill="url(#logoGoldDark)" />
+    <polygon points="200,116 214,130 200,144 186,130" fill="url(#logoGoldShine)" />
+  </g>
+
+  <!-- 2. Wordmark on Right -->
+  <text x="96" y="44" font-family="'Playfair Display', 'Cinzel', Georgia, serif" font-size="23" font-weight="700" letter-spacing="0.14em" fill="currentColor">
+    VANGUARD
+  </text>
+  <text x="262" y="44" font-family="'Inter', -apple-system, sans-serif" font-size="22" font-weight="400" letter-spacing="0.14em" fill="url(#logoGoldLight)">
+    BOOKSEARCH
+  </text>
+  <text x="98" y="64" font-family="'Inter', -apple-system, sans-serif" font-size="8.5" font-weight="500" letter-spacing="0.26em" fill="currentColor" fill-opacity="0.65">
+    DISCOVERABILITY &amp; POSITIONING ARCHITECTURE
+  </text>
+</svg>
