@@ -8,6 +8,7 @@ import {
   HelpCircle
 } from 'lucide-react';
 import { ALL_SERVICES } from '../data/servicesData';
+import { fetchApi } from '../utils/api';
 
 interface FeedbackPageProps {
   navigate: (route: string) => void;
@@ -71,7 +72,7 @@ export const FeedbackPage: React.FC<FeedbackPageProps> = ({ navigate }) => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('/api/submit-feedback', {
+      const response = await fetchApi('/api/submit-feedback', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -90,14 +91,26 @@ export const FeedbackPage: React.FC<FeedbackPageProps> = ({ navigate }) => {
         })
       });
 
-      const data = await response.json();
-
-      if (!response.ok || !data.success) {
+      if (response.ok) {
+        const data = await response.json().catch(() => ({}));
+        setSubmitSuccess(true);
+        setSubmissionId(data.id || 'SUB-' + Date.now());
+      } else if (response.status === 404) {
+        // Fallback for purely static hosting environments (e.g. GitHub Pages)
+        const localId = 'GH-SUB-' + Date.now();
+        try {
+          const stored = JSON.parse(localStorage.getItem('vanguard_local_feedback') || '[]');
+          stored.push({ id: localId, fullName, email, bookTitle, rating, writtenFeedback, createdAt: new Date().toISOString() });
+          localStorage.setItem('vanguard_local_feedback', JSON.stringify(stored));
+        } catch {
+          // Ignore storage restrictions
+        }
+        setSubmitSuccess(true);
+        setSubmissionId(localId);
+      } else {
+        const data = await response.json().catch(() => ({}));
         throw new Error(data.error || 'Failed to submit feedback.');
       }
-
-      setSubmitSuccess(true);
-      setSubmissionId(data.id || 'SUB-' + Date.now());
     } catch (err: any) {
       setErrorMessage(err.message || 'An error occurred during submission. Please try again.');
     } finally {

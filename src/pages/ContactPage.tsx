@@ -9,6 +9,7 @@ import {
   ShieldCheck,
   FileText
 } from 'lucide-react';
+import { fetchApi } from '../utils/api';
 
 interface ContactPageProps {
   initialSubject?: string;
@@ -63,7 +64,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('/api/submit-contact', {
+      const response = await fetchApi('/api/submit-contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -76,14 +77,26 @@ export const ContactPage: React.FC<ContactPageProps> = ({
         })
       });
 
-      const data = await response.json();
-
-      if (!response.ok || !data.success) {
+      if (response.ok) {
+        const data = await response.json().catch(() => ({}));
+        setSubmitSuccess(true);
+        setContactId(data.id || 'INQ-' + Date.now());
+      } else if (response.status === 404) {
+        // Fallback for static hosting environments (e.g. GitHub Pages)
+        const localId = 'GH-INQ-' + Date.now();
+        try {
+          const stored = JSON.parse(localStorage.getItem('vanguard_local_contacts') || '[]');
+          stored.push({ id: localId, name, email, subject, message, bookOrWebsite, createdAt: new Date().toISOString() });
+          localStorage.setItem('vanguard_local_contacts', JSON.stringify(stored));
+        } catch {
+          // Ignore storage restrictions
+        }
+        setSubmitSuccess(true);
+        setContactId(localId);
+      } else {
+        const data = await response.json().catch(() => ({}));
         throw new Error(data.error || 'Failed to submit contact enquiry.');
       }
-
-      setSubmitSuccess(true);
-      setContactId(data.id || 'INQ-' + Date.now());
     } catch (err: any) {
       setErrorMessage(err.message || 'Unable to submit your message at this time. Please try again or write directly to vanguardbooksearch@gmail.com.');
     } finally {

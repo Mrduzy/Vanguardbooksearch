@@ -16,6 +16,7 @@ import {
   Users
 } from 'lucide-react';
 import { SERVICE_CATEGORIES, ALL_SERVICES } from '../data/servicesData';
+import { fetchApi } from '../utils/api';
 
 interface HomePageProps {
   navigate: (route: string) => void;
@@ -61,7 +62,7 @@ export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
 
   useEffect(() => {
     let isMounted = true;
-    fetch('/api/public-testimonials')
+    fetchApi('/api/public-testimonials')
       .then(async res => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const contentType = res.headers.get('content-type');

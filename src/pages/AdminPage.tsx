@@ -22,6 +22,7 @@ import {
   Activity
 } from 'lucide-react';
 import type { AuthorReview, ContactSubmission } from '../types';
+import { fetchApi } from '../utils/api';
 
 interface HealthCheckData {
   status: string;
@@ -63,8 +64,8 @@ export const AdminPage: React.FC = () => {
 
   const checkSession = async () => {
     try {
-      const res = await fetch('/api/admin-session');
-      const data = await res.json();
+      const res = await fetchApi('/api/admin-session');
+      const data = await res.json().catch(() => ({}));
       if (res.ok && data.authenticated) {
         setIsAuthenticated(true);
         loadDashboardData();
@@ -82,12 +83,17 @@ export const AdminPage: React.FC = () => {
     setIsLoggingIn(true);
 
     try {
-      const res = await fetch('/api/admin-login', {
+      const res = await fetchApi('/api/admin-login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password })
       });
-      const data = await res.json();
+
+      if (res.status === 404) {
+        throw new Error('Backend API is not available on this static host. Configure VITE_API_BASE_URL to connect your deployed backend (e.g. Netlify Functions or Node server).');
+      }
+
+      const data = await res.json().catch(() => ({}));
 
       if (!res.ok || !data.success) {
         throw new Error(data.error || 'Authentication failed. Incorrect admin credentials.');
@@ -105,7 +111,7 @@ export const AdminPage: React.FC = () => {
 
   const handleLogout = async () => {
     try {
-      await fetch('/api/admin-logout', { method: 'POST' });
+      await fetchApi('/api/admin-logout', { method: 'POST' });
     } catch {
       // Ignored
     }
@@ -118,22 +124,22 @@ export const AdminPage: React.FC = () => {
     setIsLoadingData(true);
     try {
       // 1. Fetch reviews
-      const revRes = await fetch('/api/admin-reviews');
-      const revData = await revRes.json();
+      const revRes = await fetchApi('/api/admin-reviews');
+      const revData = await revRes.json().catch(() => ({}));
       if (revRes.ok && revData.success) {
         setReviews(revData.reviews || []);
       }
 
       // 2. Fetch contacts
-      const conRes = await fetch('/api/admin-contacts');
-      const conData = await conRes.json();
+      const conRes = await fetchApi('/api/admin-contacts');
+      const conData = await conRes.json().catch(() => ({}));
       if (conRes.ok && conData.success) {
         setContacts(conData.contacts || []);
       }
 
       // 3. Fetch diagnostic health
-      const hRes = await fetch('/api/health-check');
-      const hData = await hRes.json();
+      const hRes = await fetchApi('/api/health-check');
+      const hData = await hRes.json().catch(() => ({}));
       setHealthData(hData);
     } catch (err) {
       console.error('Error loading admin data:', err);
@@ -148,12 +154,12 @@ export const AdminPage: React.FC = () => {
     extraEditData?: any
   ) => {
     try {
-      const res = await fetch('/api/admin-review-action', {
+      const res = await fetchApi('/api/admin-review-action', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ reviewId, action, editData: extraEditData })
       });
-      const data = await res.json();
+      const data = await res.json().catch(() => ({}));
 
       if (!res.ok || !data.success) {
         throw new Error(data.error || 'Action failed');
@@ -172,7 +178,7 @@ export const AdminPage: React.FC = () => {
 
   const handleContactToggleRead = async (contactId: string, currentRead: boolean) => {
     try {
-      await fetch('/api/admin-contact-read', {
+      await fetchApi('/api/admin-contact-read', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ contactId, isRead: !currentRead })

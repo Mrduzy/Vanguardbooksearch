@@ -9,15 +9,27 @@ import { FeedbackPage } from './pages/FeedbackPage';
 import { ContactPage } from './pages/ContactPage';
 import { AdminPage } from './pages/AdminPage';
 
+const REPO_BASE = '/Vanguardbooksearch';
+
+function stripBasePath(path: string): string {
+  if (!path) return '/';
+  let normalized = path;
+  if (normalized.toLowerCase().startsWith(REPO_BASE.toLowerCase())) {
+    normalized = normalized.slice(REPO_BASE.length);
+  }
+  normalized = normalized.replace(/\/+$/, '');
+  return normalized === '' ? '/' : normalized;
+}
+
 function getInitialPath(): string {
   if (typeof window === 'undefined') return '/';
-  // Support standard path or hash routing fallback
   const pathname = window.location.pathname;
-  if (pathname && pathname !== '/' && pathname !== '') {
-    return pathname.replace(/\/+$/, '') || '/';
+  if (pathname) {
+    const stripped = stripBasePath(pathname);
+    if (stripped !== '/') return stripped;
   }
   if (window.location.hash && window.location.hash.startsWith('#/')) {
-    return window.location.hash.substring(1).replace(/\/+$/, '') || '/';
+    return stripBasePath(window.location.hash.substring(1));
   }
   return '/';
 }
@@ -59,15 +71,24 @@ export function App() {
   const navigate = (to: string) => {
     const [pathPart, queryString] = to.split('?');
     const searchParams = new URLSearchParams(queryString || '');
-    const cleanPath = pathPart.replace(/\/+$/, '') || '/';
+    const logicalPath = stripBasePath(pathPart);
     
+    // Check if we are running under the GitHub Pages base path
+    const isUnderRepo = typeof window !== 'undefined' && 
+      window.location.pathname.toLowerCase().startsWith(REPO_BASE.toLowerCase());
+    
+    const browserPath = (isUnderRepo ? REPO_BASE : '') + 
+      (logicalPath === '/' ? '/' : logicalPath) + 
+      (queryString ? `?${queryString}` : '');
+
     try {
-      window.history.pushState({}, '', to);
+      window.history.pushState({}, '', browserPath);
     } catch {
-      window.location.hash = to;
+      window.location.hash = (logicalPath === '/' ? '/' : logicalPath) + 
+        (queryString ? `?${queryString}` : '');
     }
 
-    setCurrentRoute(cleanPath);
+    setCurrentRoute(logicalPath);
     setRouteParams({
       cat: searchParams.get('cat') || undefined,
       service: searchParams.get('service') || undefined,
@@ -78,7 +99,7 @@ export function App() {
 
   // Determine which page component to display
   const renderCurrentPage = () => {
-    const clean = currentRoute.replace(/\/+$/, '') || '/';
+    const clean = stripBasePath(currentRoute);
     switch (clean) {
       case '/services':
         return (
