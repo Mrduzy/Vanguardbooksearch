@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { getAssetUrl, vanguardRasterEmblem } from '../utils/assets';
 
 interface BrandLogoProps {
   className?: string;
@@ -23,13 +24,16 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
   const subtitleSize =
     size === 'sm' ? 'text-[8px]' : size === 'lg' ? 'text-[10px]' : 'text-[9px]';
 
+  const primaryEmblemSrc = getAssetUrl('favicon.svg');
+  const fallbackEmblemSrc = vanguardRasterEmblem || getAssetUrl('logo-emblem.png');
+
   return (
     <div className={`inline-flex items-center gap-3 select-none ${className}`}>
       {/* 1. Official Emblem */}
       <div className={`relative ${emblemDim} shrink-0 flex items-center justify-center`}>
         {!useFallback ? (
           <img
-            src="/favicon.svg"
+            src={primaryEmblemSrc}
             alt="VANGUARDBOOKSEARCH Emblem"
             className="w-full h-full object-contain filter drop-shadow-sm transition-transform duration-200 hover:scale-105"
             onError={() => setUseFallback(true)}
@@ -38,7 +42,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
           />
         ) : (
           <img
-            src="/logo-emblem.png"
+            src={fallbackEmblemSrc}
             alt="VANGUARDBOOKSEARCH Emblem"
             className="w-full h-full object-contain filter drop-shadow-sm"
             loading="eager"

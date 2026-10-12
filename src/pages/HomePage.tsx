@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { SERVICE_CATEGORIES, ALL_SERVICES } from '../data/servicesData';
 import { fetchApi } from '../utils/api';
+import { getAssetUrl } from '../utils/assets';
 
 interface HomePageProps {
   navigate: (route: string) => void;
@@ -182,7 +183,7 @@ export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
                   {/* Official Brand Emblem Feature */}
                   <div className="flex items-center gap-4 p-3.5 rounded-xl bg-white/90 dark:bg-stone-850/90 border border-amber-500/25 shadow-sm">
                     <img
-                      src="/favicon.svg"
+                      src={getAssetUrl('favicon.svg')}
                       alt="VANGUARDBOOKSEARCH Emblem"
                       className="w-12 h-12 object-contain filter drop-shadow-md shrink-0"
                       referrerPolicy="no-referrer"
