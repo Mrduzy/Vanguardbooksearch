@@ -21,7 +21,7 @@ import {
   Search,
   Activity
 } from 'lucide-react';
-import { AuthorReview, ContactSubmission } from '../server/storage';
+import type { AuthorReview, ContactSubmission } from '../types';
 
 interface HealthCheckData {
   status: string;

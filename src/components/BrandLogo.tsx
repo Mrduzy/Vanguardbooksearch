@@ -34,6 +34,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
             className="w-full h-full object-contain filter drop-shadow-sm transition-transform duration-200 hover:scale-105"
             onError={() => setUseFallback(true)}
             loading="eager"
+            referrerPolicy="no-referrer"
           />
         ) : (
           <img
@@ -41,6 +42,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
             alt="VANGUARDBOOKSEARCH Emblem"
             className="w-full h-full object-contain filter drop-shadow-sm"
             loading="eager"
+            referrerPolicy="no-referrer"
           />
         )}
       </div>

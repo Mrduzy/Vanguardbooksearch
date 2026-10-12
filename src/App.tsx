@@ -9,13 +9,21 @@ import { FeedbackPage } from './pages/FeedbackPage';
 import { ContactPage } from './pages/ContactPage';
 import { AdminPage } from './pages/AdminPage';
 
+function getInitialPath(): string {
+  if (typeof window === 'undefined') return '/';
+  // Support standard path or hash routing fallback
+  const pathname = window.location.pathname;
+  if (pathname && pathname !== '/' && pathname !== '') {
+    return pathname.replace(/\/+$/, '') || '/';
+  }
+  if (window.location.hash && window.location.hash.startsWith('#/')) {
+    return window.location.hash.substring(1).replace(/\/+$/, '') || '/';
+  }
+  return '/';
+}
+
 export function App() {
-  const [currentRoute, setCurrentRoute] = useState<string>(() => {
-    if (typeof window !== 'undefined') {
-      return window.location.pathname || '/';
-    }
-    return '/';
-  });
+  const [currentRoute, setCurrentRoute] = useState<string>(getInitialPath);
 
   const [routeParams, setRouteParams] = useState<{
     cat?: string;
@@ -26,7 +34,7 @@ export function App() {
   // Sync route and query params with window.location
   useEffect(() => {
     const handleLocationChange = () => {
-      const path = window.location.pathname || '/';
+      const path = getInitialPath();
       const search = new URLSearchParams(window.location.search);
       setCurrentRoute(path);
       setRouteParams({
@@ -41,15 +49,25 @@ export function App() {
     handleLocationChange();
 
     window.addEventListener('popstate', handleLocationChange);
-    return () => window.removeEventListener('popstate', handleLocationChange);
+    window.addEventListener('hashchange', handleLocationChange);
+    return () => {
+      window.removeEventListener('popstate', handleLocationChange);
+      window.removeEventListener('hashchange', handleLocationChange);
+    };
   }, []);
 
   const navigate = (to: string) => {
-    const [path, queryString] = to.split('?');
+    const [pathPart, queryString] = to.split('?');
     const searchParams = new URLSearchParams(queryString || '');
+    const cleanPath = pathPart.replace(/\/+$/, '') || '/';
     
-    window.history.pushState({}, '', to);
-    setCurrentRoute(path || '/');
+    try {
+      window.history.pushState({}, '', to);
+    } catch {
+      window.location.hash = to;
+    }
+
+    setCurrentRoute(cleanPath);
     setRouteParams({
       cat: searchParams.get('cat') || undefined,
       service: searchParams.get('service') || undefined,
@@ -60,7 +78,8 @@ export function App() {
 
   // Determine which page component to display
   const renderCurrentPage = () => {
-    switch (currentRoute) {
+    const clean = currentRoute.replace(/\/+$/, '') || '/';
+    switch (clean) {
       case '/services':
         return (
           <ServicesPage

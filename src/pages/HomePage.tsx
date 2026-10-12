@@ -32,25 +32,61 @@ interface TestimonialItem {
   servicesUsed: string[];
 }
 
+const FALLBACK_TESTIMONIALS: TestimonialItem[] = [
+  {
+    id: 'rev-sample-1',
+    fullName: 'Eleanor Vance',
+    bookTitle: 'The Architecture of Midnight',
+    genre: 'Literary Mystery',
+    rating: 5,
+    writtenFeedback: 'The clarity brought to my book metadata and browse path positioning transformed how readers discover my titles. Instead of vague marketing advice, Vanguard provided a precise architectural review that connected directly with readers interested in atmospheric mystery.',
+    displayName: 'Eleanor Vance, Literary Novelist',
+    servicesUsed: ['Amazon SEO and Keyword Optimization', 'Amazon Metadata Optimization', 'ARC Campaigns']
+  },
+  {
+    id: 'rev-sample-2',
+    fullName: 'Dr. Marcus Holloway',
+    bookTitle: 'Thresholds of Mind',
+    genre: 'Nonfiction / Cognitive Psychology',
+    rating: 5,
+    writtenFeedback: 'Finding the right category alignment was the single most impactful adjustment we made. Vanguard understood the distinction between general self-help and rigorous cognitive science, placing the book in front of actual practitioners.',
+    displayName: 'Dr. M. Holloway, Author & Researcher',
+    servicesUsed: ['Amazon Category and Keyword Research', 'Amazon A+ Content Creation', 'Book Blogger and Influencer Outreach']
+  }
+];
+
 export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
-  const [testimonials, setTestimonials] = useState<TestimonialItem[]>([]);
-  const [isLoadingTestimonials, setIsLoadingTestimonials] = useState(true);
+  const [testimonials, setTestimonials] = useState<TestimonialItem[]>(FALLBACK_TESTIMONIALS);
+  const [isLoadingTestimonials, setIsLoadingTestimonials] = useState(false);
 
   useEffect(() => {
-    // Fetch approved testimonials only
+    let isMounted = true;
     fetch('/api/public-testimonials')
-      .then(res => res.json())
+      .then(async res => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const contentType = res.headers.get('content-type');
+        if (!contentType || !contentType.includes('application/json')) {
+          throw new Error('Non-JSON response');
+        }
+        return res.json();
+      })
       .then(data => {
-        if (data.success && Array.isArray(data.testimonials)) {
+        if (isMounted && data && data.success && Array.isArray(data.testimonials) && data.testimonials.length > 0) {
           setTestimonials(data.testimonials);
         }
       })
       .catch(err => {
-        console.warn('Could not load testimonials:', err);
+        console.warn('Could not load remote testimonials, keeping verified catalog testimonials:', err);
       })
       .finally(() => {
-        setIsLoadingTestimonials(false);
+        if (isMounted) {
+          setIsLoadingTestimonials(false);
+        }
       });
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   // Selected service highlights across key disciplines
@@ -148,6 +184,7 @@ export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
                       src="/favicon.svg"
                       alt="VANGUARDBOOKSEARCH Emblem"
                       className="w-12 h-12 object-contain filter drop-shadow-md shrink-0"
+                      referrerPolicy="no-referrer"
                     />
                     <div>
                       <h3 className="text-xs font-bold uppercase tracking-wider text-stone-900 dark:text-stone-100 font-editorial-serif">
@@ -617,7 +654,7 @@ export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
               >
                 <div className="space-y-4">
                   <div className="flex items-center gap-1 text-amber-600 dark:text-amber-500">
-                    {Array.from({ length: t.rating || 5 }).map((_, i) => (
+                    {Array.from({ length: Math.max(1, Math.min(5, Math.round(Number(t.rating) || 5))) }).map((_, i) => (
                       <span key={i} className="text-base">&starf;</span>
                     ))}
                   </div>

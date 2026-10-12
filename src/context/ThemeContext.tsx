@@ -13,9 +13,13 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setThemeState] = useState<Theme>(() => {
     if (typeof window !== 'undefined') {
-      const stored = localStorage.getItem('vanguard_theme') as Theme | null;
-      if (stored === 'light' || stored === 'dark') {
-        return stored;
+      try {
+        const stored = localStorage.getItem('vanguard_theme') as Theme | null;
+        if (stored === 'light' || stored === 'dark') {
+          return stored;
+        }
+      } catch {
+        // Fallback gracefully if localStorage is restricted
       }
       return 'light'; // Default is clean, warm, light theme
     }
@@ -29,7 +33,11 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     } else {
       root.classList.remove('dark');
     }
-    localStorage.setItem('vanguard_theme', theme);
+    try {
+      localStorage.setItem('vanguard_theme', theme);
+    } catch {
+      // Storage access blocked or restricted
+    }
   }, [theme]);
 
   const toggleTheme = () => {
