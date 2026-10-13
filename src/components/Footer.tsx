@@ -1,12 +1,14 @@
 import React from 'react';
-import { Mail, Globe, ArrowRight } from 'lucide-react';
+import { Mail, Globe, ArrowRight, Sun, Moon } from 'lucide-react';
 import { BrandLogo } from './BrandLogo';
+import { useTheme } from '../context/ThemeContext';
 
 interface FooterProps {
   navigate: (route: string) => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({ navigate }) => {
+  const { theme, toggleTheme } = useTheme();
   return (
     <footer className="border-t border-stone-200 dark:border-stone-800 bg-stone-100/70 dark:bg-stone-950 text-stone-700 dark:text-stone-300 transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -132,9 +134,29 @@ export const Footer: React.FC<FooterProps> = ({ navigate }) => {
           <p>
             &copy; 2026 VANGUARDBOOKSEARCH. All rights reserved. Strategic book discoverability and positioning architecture.
           </p>
-          <p className="text-center sm:text-right">
-            Dedicated to author visibility, catalog fidelity, and reader access.
-          </p>
+
+          <div className="flex items-center gap-4">
+            <button
+              onClick={toggleTheme}
+              aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs rounded border border-stone-300 dark:border-stone-700 bg-white/80 dark:bg-stone-900 text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-stone-100 transition-colors cursor-pointer"
+            >
+              {theme === 'dark' ? (
+                <>
+                  <Sun className="w-3.5 h-3.5 text-amber-500" />
+                  <span>Light Theme</span>
+                </>
+              ) : (
+                <>
+                  <Moon className="w-3.5 h-3.5 text-stone-500 dark:text-stone-400" />
+                  <span>Dark Theme</span>
+                </>
+              )}
+            </button>
+            <p className="text-center sm:text-right hidden sm:block">
+              Dedicated to author visibility and catalog fidelity.
+            </p>
+          </div>
         </div>
       </div>
     </footer>

@@ -62,15 +62,25 @@ export const Header: React.FC<HeaderProps> = ({ currentRoute, navigate }) => {
           </nav>
 
           {/* Right Action Items */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-3">
             {/* Theme Toggle Button */}
             <button
               onClick={toggleTheme}
               aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
-              className="p-2 rounded-md text-stone-600 hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-100 hover:bg-stone-200/60 dark:hover:bg-stone-800 transition-colors"
+              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-stone-200 dark:border-stone-800 bg-stone-100/80 dark:bg-stone-900/80 text-xs font-medium text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-stone-50 hover:border-stone-300 dark:hover:border-stone-700 transition-all cursor-pointer shadow-xs"
               title={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
             >
-              {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+              {theme === 'dark' ? (
+                <>
+                  <Sun className="w-4 h-4 text-amber-500" />
+                  <span className="hidden lg:inline text-[11px] font-medium tracking-wide">Light</span>
+                </>
+              ) : (
+                <>
+                  <Moon className="w-4 h-4 text-stone-600 dark:text-stone-400" />
+                  <span className="hidden lg:inline text-[11px] font-medium tracking-wide">Dark</span>
+                </>
+              )}
             </button>
 
             {/* Primary Action Button */}
@@ -88,9 +98,10 @@ export const Header: React.FC<HeaderProps> = ({ currentRoute, navigate }) => {
             <button
               onClick={toggleTheme}
               aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
-              className="p-2 rounded text-stone-600 hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-100"
+              className="p-2 rounded-lg border border-stone-200 dark:border-stone-800 bg-stone-100/60 dark:bg-stone-900/60 text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-stone-100 cursor-pointer"
+              title={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
             >
-              {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+              {theme === 'dark' ? <Sun className="w-4 h-4 text-amber-500" /> : <Moon className="w-4 h-4 text-stone-600 dark:text-stone-400" />}
             </button>
 
             <button
@@ -126,6 +137,30 @@ export const Header: React.FC<HeaderProps> = ({ currentRoute, navigate }) => {
               );
             })}
           </nav>
+
+          {/* Mobile Theme Toggle Row */}
+          <div className="flex items-center justify-between p-3 rounded-lg border border-stone-200 dark:border-stone-800 bg-stone-100/60 dark:bg-stone-900/40">
+            <span className="text-xs font-medium text-stone-700 dark:text-stone-300">
+              Appearance Theme
+            </span>
+            <button
+              onClick={toggleTheme}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded bg-white dark:bg-stone-850 border border-stone-300 dark:border-stone-700 text-stone-800 dark:text-stone-100 shadow-xs cursor-pointer"
+            >
+              {theme === 'dark' ? (
+                <>
+                  <Sun className="w-3.5 h-3.5 text-amber-500" />
+                  <span>Switch to Light</span>
+                </>
+              ) : (
+                <>
+                  <Moon className="w-3.5 h-3.5 text-stone-600 dark:text-stone-400" />
+                  <span>Switch to Dark</span>
+                </>
+              )}
+            </button>
+          </div>
+
           <div className="pt-2 border-t border-stone-200 dark:border-stone-800">
             <button
               onClick={() => handleLinkClick('/contact')}
