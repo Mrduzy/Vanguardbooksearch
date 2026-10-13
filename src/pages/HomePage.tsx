@@ -17,7 +17,13 @@ import {
 } from 'lucide-react';
 import { SERVICE_CATEGORIES, ALL_SERVICES } from '../data/servicesData';
 import { fetchApi } from '../utils/api';
-import { getAssetUrl } from '../utils/assets';
+import {
+  getAssetUrl,
+  heroWorkspaceImg,
+  readerDiscoveryImg,
+  curatedCollectionImg
+} from '../utils/assets';
+import { RatingStars } from '../components/RatingStars';
 
 interface HomePageProps {
   navigate: (route: string) => void;
@@ -180,6 +186,26 @@ export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
                     </span>
                   </div>
 
+                  {/* Editorial Photography Feature: Publishing Architecture Workspace */}
+                  <div className="relative rounded-xl overflow-hidden border border-stone-200/80 dark:border-stone-800 shadow-sm group">
+                    <img
+                      src={heroWorkspaceImg}
+                      alt="Architectural book layout, compass, and publishing consultation workspace"
+                      className="w-full h-40 sm:h-44 object-cover object-center filter contrast-[1.02] brightness-[0.98] transition-transform duration-500 group-hover:scale-105"
+                      referrerPolicy="no-referrer"
+                      loading="eager"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-stone-950/20 to-transparent" />
+                    <div className="absolute bottom-2.5 left-3 right-3 flex items-center justify-between text-[11px] text-stone-200">
+                      <span className="font-editorial-serif tracking-wider uppercase font-semibold text-amber-300">
+                        Publishing Architecture Study
+                      </span>
+                      <span className="text-stone-300 font-mono text-[10px]">
+                        Diagnostic Alignment
+                      </span>
+                    </div>
+                  </div>
+
                   {/* Official Brand Emblem Feature */}
                   <div className="flex items-center gap-4 p-3.5 rounded-xl bg-white/90 dark:bg-stone-850/90 border border-amber-500/25 shadow-sm">
                     <img
@@ -270,16 +296,37 @@ export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
       {/* 4 & 5. THE DISCOVERABILITY GAP & WHY HIGH PERFORMING BOOKS MISS READERS */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="rounded-2xl border border-stone-200 dark:border-stone-800 bg-stone-100/50 dark:bg-stone-900/40 p-8 md:p-12">
-          <div className="max-w-3xl space-y-4">
-            <span className="text-xs font-semibold uppercase tracking-wider text-amber-700 dark:text-amber-400">
-              The Discoverability Gap
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-stone-950 dark:text-stone-100 font-editorial-serif leading-tight">
-              A Book Can Resonate Powerfully with Existing Readers While Remaining Invisible to Potential Audiences
-            </h2>
-            <p className="text-base md:text-lg text-stone-600 dark:text-stone-300 leading-relaxed pt-2">
-              Many authors experience a perplexing paradox: the readers who discover their book provide glowing reviews, recommend it to friends, and read subsequent installments, yet total catalog visibility remains constrained.
-            </p>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            <div className="lg:col-span-7 space-y-4">
+              <span className="text-xs font-semibold uppercase tracking-wider text-amber-700 dark:text-amber-400">
+                The Discoverability Gap
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold text-stone-950 dark:text-stone-100 font-editorial-serif leading-tight">
+                A Book Can Resonate Powerfully with Existing Readers While Remaining Invisible to Potential Audiences
+              </h2>
+              <p className="text-base md:text-lg text-stone-600 dark:text-stone-300 leading-relaxed pt-2">
+                Many authors experience a perplexing paradox: the readers who discover their book provide glowing reviews, recommend it to friends, and read subsequent installments, yet total catalog visibility remains constrained.
+              </p>
+              <p className="text-sm text-stone-500 dark:text-stone-400 leading-relaxed font-light">
+                Discoverability is not a measure of writing quality alone. It is an architectural bridge connecting the narrative craft of your manuscript with the retail search engines and reader communities actively searching for your genre.
+              </p>
+            </div>
+
+            <div className="lg:col-span-5">
+              <div className="relative rounded-2xl overflow-hidden border border-stone-200 dark:border-stone-800 shadow-md group">
+                <img
+                  src={readerDiscoveryImg}
+                  alt="Reader in a sunlit architectural library holding a hardcover book"
+                  className="w-full h-64 sm:h-72 object-cover object-top filter contrast-[1.02] transition-transform duration-500 group-hover:scale-105"
+                  referrerPolicy="no-referrer"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-transparent to-transparent" />
+                <div className="absolute bottom-3 left-4 right-4 text-xs text-stone-200 font-editorial-serif italic">
+                  "Sustainable readership occurs when authentic storytelling finds its intended audience without algorithmic friction."
+                </div>
+              </div>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10 pt-10 border-t border-stone-200 dark:border-stone-800">
@@ -397,7 +444,27 @@ export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
             </div>
           </div>
 
-          <div className="lg:col-span-6">
+          <div className="lg:col-span-6 space-y-6">
+            {/* Editorial Photography Feature: Curated Book Collection */}
+            <div className="relative rounded-2xl overflow-hidden border border-stone-200 dark:border-stone-800 shadow-md group">
+              <img
+                src={curatedCollectionImg}
+                alt="Clothbound books with gold foil spines on dark walnut library shelving"
+                className="w-full h-52 sm:h-56 object-cover object-center filter contrast-[1.02] transition-transform duration-500 group-hover:scale-105"
+                referrerPolicy="no-referrer"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-stone-950/20 to-transparent" />
+              <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-xs text-stone-200">
+                <span className="font-editorial-serif text-amber-300 tracking-wider uppercase font-semibold">
+                  Catalog Architecture &amp; Craft
+                </span>
+                <span className="text-stone-300 font-mono text-[11px]">
+                  Fidelity Across Formats
+                </span>
+              </div>
+            </div>
+
             <div className="p-8 rounded-2xl bg-stone-900 text-stone-100 dark:bg-stone-900/90 border border-stone-800 space-y-6">
               <div className="flex items-center justify-between border-b border-stone-800 pb-4">
                 <span className="text-xs font-semibold uppercase tracking-wider text-amber-400">
@@ -655,11 +722,7 @@ export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
                 className="p-8 rounded-2xl border border-stone-200 dark:border-stone-800 bg-stone-50/60 dark:bg-stone-900/40 space-y-6 flex flex-col justify-between"
               >
                 <div className="space-y-4">
-                  <div className="flex items-center gap-1 text-amber-600 dark:text-amber-500">
-                    {Array.from({ length: Math.max(1, Math.min(5, Math.round(Number(t.rating) || 5))) }).map((_, i) => (
-                      <span key={i} className="text-base">&starf;</span>
-                    ))}
-                  </div>
+                  <RatingStars rating={t.rating || 5} size="md" />
 
                   <p className="text-base text-stone-700 dark:text-stone-300 leading-relaxed italic font-light">
                     "{t.writtenFeedback}"

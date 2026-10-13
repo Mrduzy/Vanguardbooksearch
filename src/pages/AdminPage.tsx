@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import type { AuthorReview, ContactSubmission } from '../types';
 import { fetchApi } from '../utils/api';
+import { RatingStars } from '../components/RatingStars';
 
 interface HealthCheckData {
   status: string;
@@ -459,11 +460,7 @@ export const AdminPage: React.FC = () => {
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-1 text-amber-500 shrink-0">
-                      {Array.from({ length: rev.rating || 5 }).map((_, i) => (
-                        <span key={i} className="text-sm">&starf;</span>
-                      ))}
-                    </div>
+                    <RatingStars rating={rev.rating || 5} size="sm" />
                   </div>
 
                   {/* Feedback text */}

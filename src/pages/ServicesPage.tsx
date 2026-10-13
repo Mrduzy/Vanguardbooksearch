@@ -14,6 +14,7 @@ import {
   HelpCircle
 } from 'lucide-react';
 import { SERVICE_CATEGORIES, ALL_SERVICES, ServiceItem } from '../data/servicesData';
+import { servicesLibraryImg } from '../utils/assets';
 
 interface ServicesPageProps {
   navigate: (route: string) => void;
@@ -75,18 +76,29 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
 
   return (
     <div className="space-y-16 pb-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
-      {/* Header & Mission */}
-      <div className="space-y-4 max-w-4xl">
-        <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-amber-700 dark:text-amber-400">
-          <span className="w-2 h-2 rounded-full bg-amber-600 dark:bg-amber-400" />
-          <span>Complete Architectural Catalogue</span>
+      {/* Header & Mission with Editorial Library Showcase */}
+      <div className="space-y-6">
+        <div className="relative rounded-2xl overflow-hidden border border-stone-200 dark:border-stone-800 shadow-md group">
+          <img
+            src={servicesLibraryImg}
+            alt="Prestigious architectural library and publishing consultation study"
+            className="w-full h-48 sm:h-60 lg:h-72 object-cover object-center filter contrast-[1.02] transition-transform duration-700 group-hover:scale-105"
+            referrerPolicy="no-referrer"
+            loading="eager"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-950/40 to-transparent" />
+          <div className="absolute bottom-6 left-6 right-6 space-y-2">
+            <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-amber-300">
+              <span className="w-2 h-2 rounded-full bg-amber-400" />
+              <span>Complete Architectural Catalogue</span>
+            </div>
+            <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white font-editorial-serif leading-tight">
+              74 Specialized Disciplines in Book Discoverability and Positioning
+            </h1>
+          </div>
         </div>
 
-        <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-stone-950 dark:text-stone-50 font-editorial-serif leading-tight">
-          74 Specialized Disciplines in Book Discoverability and Positioning
-        </h1>
-
-        <p className="text-lg text-stone-600 dark:text-stone-300 leading-relaxed font-light">
+        <p className="text-base sm:text-lg text-stone-600 dark:text-stone-300 leading-relaxed font-light max-w-4xl">
           Each offering represents an exact intervention designed to resolve specific discoverability friction. We evaluate individual book needs and apply only the relevant disciplines rather than imposing unnecessary packages.
         </p>
       </div>

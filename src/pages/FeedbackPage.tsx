@@ -360,16 +360,17 @@ export const FeedbackPage: React.FC<FeedbackPageProps> = ({ navigate }) => {
                     onClick={() => setRating(star)}
                     onMouseEnter={() => setHoverRating(star)}
                     onMouseLeave={() => setHoverRating(0)}
-                    className="p-1 text-2xl transition-transform hover:scale-110 focus:outline-none"
+                    className="p-1 transition-transform hover:scale-110 focus:outline-none cursor-pointer"
                     aria-label={`Rate ${star} out of 5 stars`}
                   >
-                    <span className={
-                      (hoverRating || rating) >= star
-                        ? 'text-amber-500'
-                        : 'text-stone-300 dark:text-stone-700'
-                    }>
-                      &starf;
-                    </span>
+                    <Star
+                      className={`w-7 h-7 transition-colors ${
+                        (hoverRating || rating) >= star
+                          ? 'fill-amber-500 text-amber-500'
+                          : 'fill-transparent text-stone-300 dark:text-stone-700'
+                      }`}
+                      aria-hidden="true"
+                    />
                   </button>
                 ))}
                 <span className="ml-2 text-xs font-medium text-stone-600 dark:text-stone-400">

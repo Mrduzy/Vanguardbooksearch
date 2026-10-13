@@ -12,6 +12,7 @@ import {
   Compass,
   FileCheck
 } from 'lucide-react';
+import { heroWorkspaceImg } from '../utils/assets';
 
 interface MethodPageProps {
   navigate: (route: string) => void;
@@ -172,15 +173,35 @@ export const MethodPage: React.FC<MethodPageProps> = ({ navigate }) => {
         </p>
       </div>
 
-      {/* Strategic Notice Banner */}
-      <div className="p-6 rounded-xl border border-stone-200 dark:border-stone-800 bg-stone-100/60 dark:bg-stone-900/40 space-y-2 text-xs text-stone-600 dark:text-stone-400 leading-relaxed">
-        <div className="font-semibold text-stone-900 dark:text-stone-100 flex items-center gap-1.5 text-sm">
-          <ShieldCheck className="w-4 h-4 text-amber-600 dark:text-amber-500" />
-          <span>Individualized Strategy Principle</span>
+      {/* Strategic Notice Banner with Editorial Photo */}
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-6 p-6 sm:p-8 rounded-2xl border border-stone-200 dark:border-stone-800 bg-stone-100/60 dark:bg-stone-900/40 items-center">
+        <div className="md:col-span-8 space-y-3">
+          <div className="font-semibold text-stone-900 dark:text-stone-100 flex items-center gap-2 text-sm">
+            <ShieldCheck className="w-4 h-4 text-amber-600 dark:text-amber-500" />
+            <span>Individualized Strategy Principle</span>
+          </div>
+          <p className="text-xs sm:text-sm text-stone-600 dark:text-stone-300 leading-relaxed font-light">
+            The appropriate positioning architecture depends strictly upon the individual book, its subgenre, existing catalog presentation, intended readership, publishing distribution model, and available evidence. We never imply that every author needs every service. We evaluate what is necessary for your specific catalog.
+          </p>
+          <div className="pt-1 text-[11px] text-stone-500 font-mono">
+            Evidence-Based Diagnostics · No Generic Prescriptions
+          </div>
         </div>
-        <p>
-          The appropriate positioning architecture depends strictly upon the individual book, its subgenre, existing catalog presentation, intended readership, publishing distribution model, and available evidence. We never imply that every author needs every service. We evaluate what is necessary for your specific catalog.
-        </p>
+        <div className="md:col-span-4">
+          <div className="relative rounded-xl overflow-hidden border border-stone-200 dark:border-stone-800 shadow-sm group">
+            <img
+              src={heroWorkspaceImg}
+              alt="Consultant desk with open architectural book and compass"
+              className="w-full h-36 object-cover object-center filter contrast-[1.02] transition-transform duration-500 group-hover:scale-105"
+              referrerPolicy="no-referrer"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-stone-950/70 via-transparent to-transparent" />
+            <span className="absolute bottom-2 left-3 text-[10px] text-amber-200 font-editorial-serif tracking-wider uppercase font-semibold">
+              Publishing Audit Study
+            </span>
+          </div>
+        </div>
       </div>
 
       {/* Interactive Process Pipeline */}
