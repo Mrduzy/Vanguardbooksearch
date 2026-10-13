@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, Globe, ArrowRight, Sun, Moon } from 'lucide-react';
+import { Mail, Globe, ArrowRight, Sun, Moon, Lock } from 'lucide-react';
 import { BrandLogo } from './BrandLogo';
 import { useTheme } from '../context/ThemeContext';
 
@@ -85,6 +85,15 @@ export const Footer: React.FC<FooterProps> = ({ navigate }) => {
                   className="hover:text-amber-600 dark:hover:text-amber-400 transition-colors cursor-pointer"
                 >
                   Contact and Consultation
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => navigate('/admin')}
+                  className="hover:text-amber-600 dark:hover:text-amber-400 transition-colors cursor-pointer inline-flex items-center gap-1.5 text-stone-500 dark:text-stone-400 pt-1"
+                >
+                  <Lock className="w-3 h-3 text-stone-400" />
+                  <span>Admin Gateway</span>
                 </button>
               </li>
             </ul>

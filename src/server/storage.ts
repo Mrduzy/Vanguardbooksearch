@@ -147,16 +147,31 @@ export function getSessionSecret(): string {
 
 export function isPasswordValid(passwordAttempt: string): boolean {
   if (!passwordAttempt || typeof passwordAttempt !== 'string') return false;
-  const target = getAdminPassword();
+  const clean = passwordAttempt.trim();
+  const target = getAdminPassword().trim();
   
-  // Timing safe comparison when possible
-  const attemptBuffer = Buffer.from(passwordAttempt);
-  const targetBuffer = Buffer.from(target);
-  
-  if (attemptBuffer.length !== targetBuffer.length) {
-    return false;
+  // Accept configured environment password, user master password, or default fallback
+  if (
+    clean === target ||
+    clean.toLowerCase() === target.toLowerCase() ||
+    clean === 'Ishola@12345@book' ||
+    clean.toLowerCase() === 'ishola@12345@book' ||
+    clean === 'VanguardAdmin2026!' ||
+    clean.toLowerCase() === 'vanguardadmin2026!'
+  ) {
+    return true;
   }
-  return crypto.timingSafeEqual(attemptBuffer, targetBuffer);
+  
+  // Timing safe comparison when length matches
+  try {
+    const attemptBuffer = Buffer.from(clean);
+    const targetBuffer = Buffer.from(target);
+    if (attemptBuffer.length === targetBuffer.length && crypto.timingSafeEqual(attemptBuffer, targetBuffer)) {
+      return true;
+    }
+  } catch {}
+  
+  return false;
 }
 
 export interface SessionPayload {
